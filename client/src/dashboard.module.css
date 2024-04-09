@@ -1,0 +1,11 @@
+.page {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+
+  margin: 32px auto;
+  min-width: 100%;
+  width: 100vw;
+  max-width: 1440px;
+}
