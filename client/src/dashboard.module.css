@@ -9,3 +9,8 @@
   width: 100vw;
   max-width: 1440px;
 }
+
+.CellBase {
+  width: 10px;
+  height: 10px;
+}
