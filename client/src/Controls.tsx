@@ -92,21 +92,15 @@ export const Controls = () => {
   const [rows, setRows] = useState<Option[]>([]);
   const [columns, setColumns] = useState<Option[]>([]);
 
-  // const [index_r, setIndex_r] = useState(0);
-  const [index_c, setIndex_c] = useState(0);
-
   const [showAddRowModal, setShowAddRowModal] = useState(false);
+  const [showAddColModal, setShowAddColModal] = useState(false);
 
   const addRow = () => {
-    // const new_rows = [...rows, all_options[index_r]];
-    // setRows(new_rows);
-    // setIndex_r(index_r + 1);
     setShowAddRowModal(true);
   };
 
   const addColumn = () => {
-    columns.push(all_options[index_c]);
-    setIndex_c(index_c + 1);
+    setShowAddColModal(true);
   };
 
   useEffect(() => {
@@ -121,6 +115,13 @@ export const Controls = () => {
         setDisplay={setShowAddRowModal}
         selectedOptions={rows}
         setOptions={setRows}
+      />
+      <AddModal
+        allOptions={all_options}
+        display={showAddColModal}
+        setDisplay={setShowAddColModal}
+        selectedOptions={columns}
+        setOptions={setColumns}
       />
       <div className={styles.controls}>
         <div className={styles.title}> Search </div>

@@ -21,7 +21,7 @@ export const AddModal = (props: Props) => {
 
   const handleDeselect = (deselect: Option) => {
     deselect.selected = false;
-    if (selectedOptions.length === 0) setCurrTable(null);
+    if (selectedOptions.length === 1) setCurrTable(null);
     const newOptions = selectedOptions.filter(
       (opt) => opt.value != deselect.value
     );
