@@ -1,13 +1,18 @@
 import styles from "./addmodal.module.css";
 import {Option} from "./types";
 
-import {useState} from "react";
-
-// import {Option} from "./types";
-
 export const AddModal = (props: Props) => {
-  const [currTable, setCurrTable] = useState<string | null>(null);
-  const {display, setDisplay, allOptions, selectedOptions, setOptions} = props;
+  // const [currTable, setCurrTable] = useState<string | null>(null);
+  const {
+    display,
+    setDisplay,
+    allOptions,
+    selectedOptions,
+    setOptions,
+    currTable,
+    setCurrTable,
+    otherTable,
+  } = props;
 
   const handleSelect = (opt: Option) => {
     opt.selected = true;
@@ -46,7 +51,9 @@ export const AddModal = (props: Props) => {
               selectedOptions.map((x) => {
                 if (opt.value === x.value) selected = true;
               });
-              const disable = currTable != null && opt.table != currTable;
+              const disable =
+                (currTable != null && opt.table != currTable) ||
+                (otherTable != null && opt.table == otherTable);
 
               return (
                 <div className={styles.row}>
@@ -89,4 +96,7 @@ type Props = {
   allOptions: Option[];
   setOptions: (new_opts: Option[]) => void;
   selectedOptions: Option[];
+  currTable: string | null;
+  setCurrTable: (arg: string | null) => void;
+  otherTable: string | null;
 };

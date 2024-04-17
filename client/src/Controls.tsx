@@ -92,6 +92,9 @@ export const Controls = () => {
   const [rows, setRows] = useState<Option[]>([]);
   const [columns, setColumns] = useState<Option[]>([]);
 
+  const [rowsTable, setRowsTable] = useState<string | null>(null);
+  const [colsTable, setColsTable] = useState<string | null>(null);
+
   const [showAddRowModal, setShowAddRowModal] = useState(false);
   const [showAddColModal, setShowAddColModal] = useState(false);
 
@@ -115,6 +118,9 @@ export const Controls = () => {
         setDisplay={setShowAddRowModal}
         selectedOptions={rows}
         setOptions={setRows}
+        currTable={rowsTable}
+        setCurrTable={setRowsTable}
+        otherTable={colsTable}
       />
       <AddModal
         allOptions={all_options}
@@ -122,6 +128,9 @@ export const Controls = () => {
         setDisplay={setShowAddColModal}
         selectedOptions={columns}
         setOptions={setColumns}
+        currTable={colsTable}
+        setCurrTable={setColsTable}
+        otherTable={rowsTable}
       />
       <div className={styles.controls}>
         <div className={styles.title}> Search </div>
@@ -171,6 +180,7 @@ export const Controls = () => {
             {activeItem && <DragOption option={activeItem} />}
           </DragOverlay>
         </DndContext>
+        <div> Filters Here </div>
       </div>
     </>
   );
