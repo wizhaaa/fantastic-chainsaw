@@ -92,7 +92,7 @@ export const Controls = () => {
   const [rows, setRows] = useState<Option[]>([]);
   const [columns, setColumns] = useState<Option[]>([]);
 
-  const [index_r, setIndex_r] = useState(0);
+  // const [index_r, setIndex_r] = useState(0);
   const [index_c, setIndex_c] = useState(0);
 
   const [showAddRowModal, setShowAddRowModal] = useState(false);
