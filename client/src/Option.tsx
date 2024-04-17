@@ -5,6 +5,7 @@ import DragIcon from "./assets/drag-icon.svg";
 
 import styles from "./controls.module.css";
 
+/** Basic Option component - only renders the value  */
 export function DragOption(props: Readonly<Props>) {
   const {option} = props;
 
@@ -21,6 +22,7 @@ export function DragOption(props: Readonly<Props>) {
   };
   const draggingStyle = {
     opacity: "0.4",
+    background: "gray",
   };
   return (
     <div
@@ -35,7 +37,7 @@ export function DragOption(props: Readonly<Props>) {
         {...attributes}
         {...listeners}
       />
-      {option.content}
+      {option.value}
     </div>
   );
 }

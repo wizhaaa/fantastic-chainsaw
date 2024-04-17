@@ -1,4 +1,7 @@
 export type Option = {
   id: number | string;
-  content: string;
+  value: string;
+  table: 'securities' | 'positions';
+  selected: boolean;
+  columnname: string;
 };
