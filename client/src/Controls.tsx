@@ -7,7 +7,7 @@ import {Option} from "./types";
 import {AddModal} from "./AddModal";
 import {Filters} from "./Filters";
 
-import searchicon from "./assets/searchicon.svg";
+import trashicon from "./assets/trash.svg";
 
 import {
   DndContext,
@@ -116,6 +116,14 @@ export const Controls = () => {
     setShowAddColModal(true);
   };
 
+  function clearRows() {
+    setRows([]);
+  }
+
+  function clearCols() {
+    setColumns([]);
+  }
+
   useEffect(() => {
     setRows([]);
   }, []);
@@ -172,6 +180,10 @@ export const Controls = () => {
                 {rows.map((option, i) => {
                   return <DragOption key={i} option={option} />;
                 })}
+                <div className={styles.clearall} onClick={clearRows}>
+                  <img src={trashicon} alt="trash icon" />
+                  Clear All
+                </div>
               </div>
             </SortableContext>
             <DragOverlay>
@@ -192,6 +204,10 @@ export const Controls = () => {
                 {columns.map((option, i) => {
                   return <DragOption key={i} option={option} />;
                 })}
+                <div className={styles.clearall} onClick={clearCols}>
+                  <img src={trashicon} alt="trash icon" />
+                  Clear All
+                </div>
               </div>
             </SortableContext>
             <DragOverlay>

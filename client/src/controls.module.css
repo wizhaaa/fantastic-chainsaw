@@ -58,6 +58,8 @@
 }
 
 .option {
+  background-color: #fff;
+
   border: 1px solid #ccc;
   border-radius: 8px;
   display: flex;
@@ -85,4 +87,17 @@ input[type="checkbox"] {
 
 input[type="checkbox"]:not(:checked) {
   background-color: grey;
+}
+
+.clearall {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  gap: 4px;
+
+  cursor: pointer;
+
+  & > img {
+    width: 12px;
+  }
 }
