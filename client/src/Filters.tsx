@@ -1,5 +1,5 @@
 import styles from "./filters.module.css";
-import {useEffect, useState} from "react";
+import {useState} from "react";
 
 import {Option} from "./types";
 import dropdown from "./assets/dropdown.svg";
@@ -65,16 +65,17 @@ const VariableMenu = (props: {
 
 const ValueMenu = (props: {
   options: Value[];
-  handleSelect: (val: Value) => void;
+  handleSelect: (val: string) => void;
 }) => {
   const {options, handleSelect} = props;
+
   return (
     <div className={styles.menu}>
       {options.map((opt, i) => (
         <div
           key={i}
           className={styles.menuitem}
-          onClick={() => handleSelect(opt)}
+          onClick={() => handleSelect(opt.value)}
         >
           <div className={`${opt.selected ? styles.checked : styles.box} `} />
           {opt.value} | [{opt.selected.toString()}]
@@ -85,39 +86,39 @@ const ValueMenu = (props: {
 };
 
 const FilterRow = (props: RowProps) => {
-  const {options, setOptions, handleFilter} = props;
+  const {index, row, deleteRow, updateValues, updateVariable, options} = props;
 
-  const [currVariable, setCurrVariable] = useState<Option | null>(null);
   const [varDrop, setVarDrop] = useState<boolean>(false);
 
   const [valueDrop, setValueDrop] = useState<boolean>(false);
   const [values, setValues] = useState<Value[]>(filter_values);
-  const [selectedVals, setSelectedVals] = useState<Value[]>([]);
 
   const handleSelectVar = (newVariable: Option) => {
     // check if another filter row selected this filter already
     // 1. look at all variables => if var.selected & var.value = newVar then we just return early
-    let selected = false;
-    options.map((opt) => {
-      if (opt.selected && opt.value === newVariable.value) selected = true;
-    });
-    if (selected) return;
+    // let selected = false;
+    // options.map((opt) => {
+    //   if (opt.selected && opt.value === newVariable.value) selected = true;
+    // });
+    // if (selected) return;
 
-    if (newVariable.value !== currVariable?.value) setSelectedVals([]);
+    // if (newVariable.value !== currVariable?.value) setSelectedVals([]);
 
-    // is not selected before
-    newVariable.selected = !newVariable.selected;
+    // // is not selected before
+    // newVariable.selected = !newVariable.selected;
 
+    // setVarDrop(false);
+    // const newOptions = options.map((opt) => {
+    //   if (newVariable.value === opt.value) return newVariable;
+    //   else if (opt.value === currVariable?.value)
+    //     return {...opt, selected: false};
+    //   else return opt;
+    // });
+    // if (newVariable.selected) setCurrVariable(newVariable);
+    // else setCurrVariable(null);
+    // setOptions(newOptions);
+    updateVariable(index, newVariable);
     setVarDrop(false);
-    const newOptions = options.map((opt) => {
-      if (newVariable.value === opt.value) return newVariable;
-      else if (opt.value === currVariable?.value)
-        return {...opt, selected: false};
-      else return opt;
-    });
-    if (newVariable.selected) setCurrVariable(newVariable);
-    else setCurrVariable(null);
-    setOptions(newOptions);
   };
 
   const handleDropDownVar = () => {
@@ -125,7 +126,7 @@ const FilterRow = (props: RowProps) => {
   };
 
   const handleDropDownVal = () => {
-    setValueDrop(!valueDrop);
+    if (row.variable) setValueDrop(!valueDrop);
   };
 
   function sortBySelected(a: Value, b: Value) {
@@ -134,30 +135,33 @@ const FilterRow = (props: RowProps) => {
     else return a.value.localeCompare(b.value);
   }
 
-  const handleSelectVal = (selected: Value) => {
+  const handleSelectVal = (newValue: string) => {
+    const newIndex = row.values.indexOf(newValue);
+    if (newIndex !== -1) {
+      row.values.splice(newIndex, 1);
+      updateValues(index, row.values);
+    } else {
+      row.values.push(newValue);
+      console.log(row.values);
+      updateValues(index, row.values);
+    }
+
     const newSelections = values.map((val) => {
-      if (val.value === selected.value)
-        return {...val, selected: !val.selected};
+      if (val.value === newValue) return {...val, selected: !val.selected};
       return val;
     });
     newSelections.sort(sortBySelected);
     setValues(newSelections);
 
-    if (!selected.selected) selectedVals.push({...selected, selected: true});
-    // const selectedFilter = values.filter((val) => val.selected);
-    // setSelectedVals(selectedFilter);
-
-    console.log(selectedVals);
-    if (currVariable && values.length > 0)
-      handleFilter(currVariable, selectedVals);
+    // if (!selected.selected) selectedVals.push({...selected, selected: true});
   };
 
   return (
     <div className={styles.row}>
       <div className={styles.column}>
         <div className={styles.dropdown} onClick={handleDropDownVar}>
-          {currVariable
-            ? `${currVariable.value.toString()}`
+          {row.variable
+            ? `${row.variable.value.toString()}`
             : "Select Variable"}
           {!varDrop ? (
             <img src={dropdown} alt="dropdown" />
@@ -169,15 +173,20 @@ const FilterRow = (props: RowProps) => {
           <VariableMenu
             options={options}
             handleSelect={handleSelectVar}
-            current={currVariable}
+            current={row.variable}
           />
         )}
       </div>
       <div className={styles.column}>
-        <div className={styles.dropdown} onClick={handleDropDownVal}>
+        <div
+          className={`${styles.dropdown} ${
+            !row.variable && styles["dropdown-disabled"]
+          }`}
+          onClick={handleDropDownVal}
+        >
           <div className={styles.text}>
-            {selectedVals.length > 0
-              ? selectedVals.map((val) => val.value).join(", ")
+            {row.values.length > 0
+              ? row.values.map((val) => val).join(", ")
               : "Select Values"}
           </div>
           {!valueDrop ? (
@@ -190,52 +199,96 @@ const FilterRow = (props: RowProps) => {
           <ValueMenu options={values} handleSelect={handleSelectVal} />
         )}
       </div>
-      <img className={styles.minus} src={minus} alt="add new filter" />
+      <img
+        className={styles.minus}
+        src={minus}
+        alt="delete filter row"
+        onClick={() => deleteRow(index)}
+      />
     </div>
   );
 };
 
 export const Filters = (props: Props) => {
-  useEffect(() => {}, []);
-
   const {options: initialOptions} = props;
-  const [options, setOptions] = useState(initialOptions);
-  const [filters, setFilters] = useState<Filter>({});
+  const [filterRows, setFilterRows] = useState<FilterRow[]>([
+    {variable: null, values: []},
+  ]);
 
-  function handleFilter(variable: Option, values: Value[]) {
-    setFilters({...filters, [variable.value]: values});
-    console.log("Filters ", filters);
+  type FilterRow = {
+    variable: Option | null;
+    values: string[];
+  };
+
+  function addFilterRow() {
+    if (filterRows.length === 0 || filterRows.slice(-1)[0].values.length > 0) {
+      const newRows = [...filterRows, {variable: null, values: []}];
+      setFilterRows(newRows);
+    }
+  }
+
+  function deleteRow(index: number) {
+    const newRows = [...filterRows];
+    newRows.splice(index, 1);
+    setFilterRows(newRows);
+  }
+
+  function updateVariable(index: number, variable: Option) {
+    const newRows = [...filterRows];
+    const variableExists = newRows.some(
+      (row, i) => i !== index && row.variable === variable
+    );
+    if (!variableExists) {
+      newRows[index].variable = variable;
+      setFilterRows(newRows);
+    }
+  }
+
+  function updateValues(index: number, newValues: string[]) {
+    const newRows = [...filterRows];
+    newRows[index].values = newValues;
+    setFilterRows(newRows);
   }
 
   return (
     <div>
       <div className={styles.title}>
-        Filter <img className={styles.add} src={add} alt="add new filter" />
+        Filter
+        <img
+          className={styles.add}
+          src={add}
+          alt="add new filter"
+          onClick={addFilterRow}
+        />
       </div>
       <div> Current Where Clause: </div>
       <div>
-        {Object.keys(filters).map((key: string) => (
-          <div key={key}>
-            <div>{key}</div>
+        {filterRows.map((filter, i) => (
+          <div key={filter.variable?.value}>
             <div>
-              {filters[key].map((val) => (
-                <div key={key}> {val.value} </div>
-              ))}
+              {i} : {filter.variable?.value || "null"}
             </div>
+            <div>{filter.values.map((val) => val).join(", ")}</div>
           </div>
         ))}
       </div>
-      <div> Selected: </div>
-      <div>
-        {options.map((opt) => {
-          if (opt.selected) return <div> {opt.value} </div>;
+
+      <div className={styles.filtercol}>
+        {filterRows.map((row, i) => {
+          return (
+            <div key={row.variable?.value}>
+              <FilterRow
+                index={i}
+                row={row}
+                deleteRow={deleteRow}
+                updateVariable={updateVariable}
+                updateValues={updateValues}
+                options={initialOptions}
+              />
+            </div>
+          );
         })}
       </div>
-      <FilterRow
-        options={options}
-        setOptions={setOptions}
-        handleFilter={handleFilter}
-      />
     </div>
   );
 };
@@ -245,11 +298,10 @@ type Props = {
 };
 
 type RowProps = {
+  index: number;
+  row: {variable: Option | null; values: string[]};
+  deleteRow: (i: number) => void;
+  updateVariable: (i: number, v: Option) => void;
+  updateValues: (i: number, v: string[]) => void;
   options: Option[];
-  setOptions: (opt: Option[]) => void;
-  handleFilter: (key: Option, values: Value[]) => void;
-};
-
-type Filter = {
-  [key: string]: {value: string}[];
 };
