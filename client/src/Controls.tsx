@@ -7,6 +7,8 @@ import {Option} from "./types";
 import {AddModal} from "./AddModal";
 import {Filters} from "./Filters";
 
+import searchicon from "./assets/searchicon.svg";
+
 import {
   DndContext,
   DragOverlay,
@@ -147,7 +149,7 @@ export const Controls = () => {
         <div> Select clause (cols) : </div>
         <div> {columns.map((col) => `[${col.value}]`)}</div>
 
-        <div className={styles.title}> Search </div>
+        <div className={styles.title}> Filter Results </div>
         <div className={styles.searchcontainer}>
           <input
             type="text"

@@ -27,6 +27,7 @@
 }
 
 .dropdown {
+  background-color: #fff;
   color: #666666;
   border: 1px solid #e4e4e4;
   border-radius: 2px;
@@ -70,6 +71,8 @@
 }
 
 .menu {
+  background-color: #fff;
+
   border: 1px solid #e4e4e4;
   border-radius: 2px;
   margin: 4px 0;

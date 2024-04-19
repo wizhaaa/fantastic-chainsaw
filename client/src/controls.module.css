@@ -7,6 +7,7 @@
   height: 100vh;
 
   position: relative;
+  background: #f0f4fb;
 }
 
 .row {
@@ -36,13 +37,20 @@
 
 .searchinput {
   width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  background: transparent;
+  height: 32px;
+  border: none;
   color: #212121;
-  border-radius: 10px;
+  border-radius: 23px;
   font-size: 16px;
   outline: none;
+  background-color: none;
+  background-image: url("./assets/searchicon.svg");
+  background-position: 10px 7px;
+  background-repeat: no-repeat;
+  padding: 12px 16px;
+  padding-left: 36px;
+
+  box-sizing: border-box;
 }
 
 .drag {
