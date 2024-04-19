@@ -8,6 +8,7 @@ import {AddModal} from "./AddModal";
 import {Filters} from "./Filters";
 
 import trashicon from "./assets/trash.svg";
+import addicon from "./assets/add.svg";
 
 import {
   DndContext,
@@ -118,10 +119,12 @@ export const Controls = () => {
 
   function clearRows() {
     setRows([]);
+    setRowsTable(null);
   }
 
   function clearCols() {
     setColumns([]);
+    setColsTable(null);
   }
 
   useEffect(() => {
@@ -175,11 +178,17 @@ export const Controls = () => {
           >
             <SortableContext items={rows}>
               <div className={styles.column}>
-                <div className={styles.title}> Rows </div>
-                <button onClick={addRow}> + </button>
-                {rows.map((option, i) => {
-                  return <DragOption key={i} option={option} />;
-                })}
+                <div className={styles.headerrow}>
+                  <div className={styles.title}> Rows </div>
+                  <button className={styles.addbutton} onClick={addRow}>
+                    <img src={addicon} alt="add" />
+                  </button>
+                </div>
+                <div className={styles.groupbubble}>
+                  {rows.map((option, i) => {
+                    return <DragOption key={i} option={option} />;
+                  })}
+                </div>
                 <div className={styles.clearall} onClick={clearRows}>
                   <img src={trashicon} alt="trash icon" />
                   Clear All
@@ -199,11 +208,17 @@ export const Controls = () => {
           >
             <SortableContext items={rows}>
               <div className={styles.column}>
-                <div className={styles.title}> Columns </div>
-                <button onClick={addColumn}> + </button>
-                {columns.map((option, i) => {
-                  return <DragOption key={i} option={option} />;
-                })}
+                <div className={styles.headerrow}>
+                  <div className={styles.title}> Columns </div>
+                  <button className={styles.addbutton} onClick={addColumn}>
+                    <img src={addicon} alt="add" />
+                  </button>
+                </div>
+                <div className={styles.groupbubble}>
+                  {columns.map((option, i) => {
+                    return <DragOption key={i} option={option} />;
+                  })}
+                </div>
                 <div className={styles.clearall} onClick={clearCols}>
                   <img src={trashicon} alt="trash icon" />
                   Clear All

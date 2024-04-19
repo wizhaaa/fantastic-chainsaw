@@ -101,3 +101,36 @@ input[type="checkbox"]:not(:checked) {
     width: 12px;
   }
 }
+
+.groupbubble {
+  width: 100%;
+  min-height: 196px;
+  box-shadow: 0px 4px 10px 0px #0000000d;
+  background-color: #fff;
+  border-radius: 10px;
+  border: none;
+
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 4px;
+
+  padding: 14px 7px;
+}
+
+.headerrow {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.addbutton {
+  cursor: pointer;
+
+  all: unset;
+  transform: scale(0.7);
+
+  & > img {
+    cursor: pointer;
+  }
+}
