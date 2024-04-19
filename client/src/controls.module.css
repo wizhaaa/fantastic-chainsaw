@@ -3,7 +3,25 @@
   flex-flow: column nowrap;
   gap: 8px;
   padding: 16px;
-  border-radius: 10px;
+  width: 600px;
+  height: 100vh;
+
+  position: relative;
+}
+
+.row {
+  display: flex;
+  flex-flow: row nowrap;
+
+  gap: 8px;
+}
+
+.column {
+  display: flex;
+  flex-flow: column;
+  width: 100%;
+
+  gap: 8px;
 }
 
 .title {
@@ -12,7 +30,7 @@
 
 .searchcontainer {
   position: relative;
-  width: 300px;
+  width: 100%;
   margin: 0 auto;
 }
 
@@ -35,11 +53,28 @@
   border: 1px solid #ccc;
   border-radius: 8px;
   display: flex;
-  padding: 8px 0;
+  padding: 4px 0;
+
+  display: flex;
+  flex-flow: row;
+
+  align-items: center;
 }
 
 .activeitem {
   width: 300px;
   height: 50px;
   background: pink;
+}
+
+input[type="checkbox"] {
+  accent-color: #212121;
+  width: 1.5em;
+  height: 1.5em;
+
+  background: #1a1a1a;
+}
+
+input[type="checkbox"]:not(:checked) {
+  background-color: grey;
 }

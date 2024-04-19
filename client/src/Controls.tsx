@@ -5,6 +5,7 @@ import {useEffect, useState} from "react";
 import {Option} from "./types";
 
 import {AddModal} from "./AddModal";
+import {Filters} from "./Filters";
 
 import {
   DndContext,
@@ -46,43 +47,50 @@ export const Controls = () => {
       columnname: "trader",
     },
     {
-      value: "Security Type",
+      value: "Security ID",
       id: 4,
+      table: "securities",
+      selected: false,
+      columnname: "securityid",
+    },
+    {
+      value: "Security Type",
+      id: 5,
       table: "securities",
       selected: false,
       columnname: "securitytype",
     },
     {
       value: "Asset Class",
-      id: 5,
+      id: 6,
       table: "securities",
       selected: false,
       columnname: "assetclass",
     },
     {
       value: "Currency",
-      id: 6,
+      id: 7,
       table: "securities",
       selected: false,
       columnname: "tradingcurrency",
     },
     {
       value: "Country",
-      id: 7,
+      id: 8,
       table: "securities",
       selected: false,
       columnname: "tradingcountry",
     },
     {
       value: "Rating",
-      id: 8,
+      id: 9,
       table: "securities",
       selected: false,
       columnname: "rating",
     },
     {
       value: "Region",
-      id: 9,
+      id: 10,
       table: "securities",
       selected: false,
       columnname: "regionname",
@@ -112,27 +120,33 @@ export const Controls = () => {
 
   return (
     <>
-      <AddModal
-        allOptions={all_options}
-        display={showAddRowModal}
-        setDisplay={setShowAddRowModal}
-        selectedOptions={rows}
-        setOptions={setRows}
-        currTable={rowsTable}
-        setCurrTable={setRowsTable}
-        otherTable={colsTable}
-      />
-      <AddModal
-        allOptions={all_options}
-        display={showAddColModal}
-        setDisplay={setShowAddColModal}
-        selectedOptions={columns}
-        setOptions={setColumns}
-        currTable={colsTable}
-        setCurrTable={setColsTable}
-        otherTable={rowsTable}
-      />
       <div className={styles.controls}>
+        <AddModal
+          allOptions={all_options}
+          display={showAddRowModal}
+          setDisplay={setShowAddRowModal}
+          selectedOptions={rows}
+          setOptions={setRows}
+          currTable={rowsTable}
+          setCurrTable={setRowsTable}
+          otherTable={colsTable}
+        />
+        <AddModal
+          allOptions={all_options}
+          display={showAddColModal}
+          setDisplay={setShowAddColModal}
+          selectedOptions={columns}
+          setOptions={setColumns}
+          currTable={colsTable}
+          setCurrTable={setColsTable}
+          otherTable={rowsTable}
+        />
+        <div> Current Query: </div>
+        <div> Group Bys (rows) : </div>
+        <div> {rows.map((row) => `[${row.value}]`)}</div>
+        <div> Select clause (cols) : </div>
+        <div> {columns.map((col) => `[${col.value}]`)}</div>
+
         <div className={styles.title}> Search </div>
         <div className={styles.searchcontainer}>
           <input
@@ -141,46 +155,49 @@ export const Controls = () => {
             className={styles.searchinput}
           />
         </div>
-        <DndContext
-          sensors={sensors}
-          collisionDetection={closestCorners}
-          onDragEnd={handleDragEnd}
-          onDragStart={handleDragStart}
-          onDragMove={handleDragMove}
-        >
-          <div className={styles.title}> Grouping Row Order </div>
-          <button onClick={addRow}> + </button>
-
-          <SortableContext items={rows}>
-            {rows.map((option, i) => {
-              return <DragOption key={i} option={option} />;
-            })}
-          </SortableContext>
-
-          <DragOverlay>
-            {activeItem && <DragOption option={activeItem} />}
-          </DragOverlay>
-        </DndContext>
-        <DndContext
-          sensors={sensors}
-          collisionDetection={closestCorners}
-          onDragEnd={handleDragEnd}
-          onDragStart={handleDragStart}
-          onDragMove={handleDragMoveColumn}
-        >
-          <div className={styles.title}> Columns Order </div>
-          <button onClick={addColumn}> + </button>
-
-          <SortableContext items={rows}>
-            {columns.map((option, i) => {
-              return <DragOption key={i} option={option} />;
-            })}
-          </SortableContext>
-          <DragOverlay>
-            {activeItem && <DragOption option={activeItem} />}
-          </DragOverlay>
-        </DndContext>
-        <div> Filters Here </div>
+        <div className={styles.row}>
+          <DndContext
+            sensors={sensors}
+            collisionDetection={closestCorners}
+            onDragEnd={handleDragEnd}
+            onDragStart={handleDragStart}
+            onDragMove={handleDragMove}
+          >
+            <SortableContext items={rows}>
+              <div className={styles.column}>
+                <div className={styles.title}> Rows </div>
+                <button onClick={addRow}> + </button>
+                {rows.map((option, i) => {
+                  return <DragOption key={i} option={option} />;
+                })}
+              </div>
+            </SortableContext>
+            <DragOverlay>
+              {activeItem && <DragOption option={activeItem} />}
+            </DragOverlay>
+          </DndContext>
+          <DndContext
+            sensors={sensors}
+            collisionDetection={closestCorners}
+            onDragEnd={handleDragEnd}
+            onDragStart={handleDragStart}
+            onDragMove={handleDragMoveColumn}
+          >
+            <SortableContext items={rows}>
+              <div className={styles.column}>
+                <div className={styles.title}> Columns </div>
+                <button onClick={addColumn}> + </button>
+                {columns.map((option, i) => {
+                  return <DragOption key={i} option={option} />;
+                })}
+              </div>
+            </SortableContext>
+            <DragOverlay>
+              {activeItem && <DragOption option={activeItem} />}
+            </DragOverlay>
+          </DndContext>
+        </div>
+        <Filters options={all_options} />
       </div>
     </>
   );

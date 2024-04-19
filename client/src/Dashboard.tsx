@@ -11,6 +11,7 @@ const elements = Array.from({length: 40}, (_, index) => (
 export const Dashboard = () => {
   return (
     <div className={styles.page}>
+      <div className={styles.header}></div>
       <div className={styles.row}>
         <div className={styles.column}>{elements}</div>
 

@@ -1,18 +1,16 @@
 .modal {
-  width: 400px;
-  min-height: 80%;
+  width: 100%;
+  min-height: 100vh;
   height: auto;
 
   z-index: 200;
 
-  position: fixed;
-  top: 5%;
-  left: 66%;
+  position: absolute;
+  top: 0;
+  left: 0;
 
-  backdrop-filter: blur(1.2px);
-  background-color: rgba(0, 0, 0, 0.2);
-
-  border-radius: 8px;
+  backdrop-filter: blur(3px);
+  background-color: rgba(0, 0, 0, 0.1);
 
   display: flex;
   flex-flow: column nowrap;
@@ -25,11 +23,12 @@
   font-size: 12px;
 
   width: 80%;
-  height: 400px;
+  height: 340px;
   background: rgb(255, 255, 255);
   padding: 24px;
   border-radius: 8px;
   margin: 0 auto;
+  margin-top: -100px;
 
   display: flex;
   flex-flow: column;
@@ -60,6 +59,9 @@
 .row {
   display: flex;
   flex-flow: row;
+  gap: 6px;
+
+  align-items: center;
 }
 
 .deselect {
@@ -86,7 +88,30 @@ button:disabled {
   cursor: not-allowed;
 }
 
+.disabled {
+  opacity: 20%;
+}
+
 .selected {
   background: #212121;
   color: #f0f0f0;
+}
+
+.checkbox {
+  width: 13.44px;
+  height: 13.44px;
+  background: #d9d9d9;
+  border-radius: 3.1px;
+}
+
+.checkedbox {
+  width: 13.44px;
+  height: 13.44px;
+  background: #212121;
+  border-radius: 3.1px;
+}
+
+.checkicon {
+  width: 13.44px;
+  height: 13.44px;
 }

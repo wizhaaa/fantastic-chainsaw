@@ -1,6 +1,8 @@
 import styles from "./addmodal.module.css";
 import {Option} from "./types";
 
+import check from "./assets/check.svg";
+
 export const AddModal = (props: Props) => {
   // const [currTable, setCurrTable] = useState<string | null>(null);
   const {
@@ -33,18 +35,17 @@ export const AddModal = (props: Props) => {
     setOptions(newOptions);
   };
 
+  const handleTick = (option: Option, selected: boolean) => {
+    if (selected) handleDeselect(option);
+    else handleSelect(option);
+  };
+
   // const options = [1, 2, 3, 4];
   if (display)
     return (
       <div className={styles.modal}>
         <div className={styles.content}>
           Add
-          <div> selected options: </div>
-          {/* <div className={styles.options}>
-            {selectedOptions.map((opt) => {
-              return <div className={styles.option}>{opt.value}</div>;
-            })}
-          </div> */}
           <div className={styles.options}>
             {allOptions.map((opt) => {
               let selected = false;
@@ -54,27 +55,56 @@ export const AddModal = (props: Props) => {
               const disable =
                 (currTable != null && opt.table != currTable) ||
                 (otherTable != null && opt.table == otherTable);
+              // if (opt.table === "both") disable = false;
 
               return (
-                <div className={styles.row}>
-                  <button
+                <div className={`${styles.row} ${disable && styles.disabled}`}>
+                  {/* <input
                     className={`${styles.option} ${
                       selected && styles.selected
                     }`}
-                    onClick={() => !selected && handleSelect(opt)}
+                    type="checkbox"
+                    id={opt.value}
                     disabled={disable}
-                  >
-                    <span>{opt.value}</span>
-                    {/* Selected = {selected.toString()} */}
-                  </button>
+                    onClick={() => handleTick(opt, selected)}
+                  /> */}
                   {selected && (
+                    <div
+                      className={styles.checkedbox}
+                      onClick={() => handleTick(opt, selected)}
+                    >
+                      <img
+                        className={styles.checkicon}
+                        src={check}
+                        alt="check"
+                      />
+                    </div>
+                  )}
+                  {!selected && (
+                    <div
+                      className={styles.checkbox}
+                      onClick={() => {
+                        if (!disable) handleTick(opt, selected);
+                      }}
+                    />
+                  )}
+                  <label htmlFor={opt.value}>{opt.value}</label>
+
+                  {/* <button
+                    className={`${styles.option} ${
+                      selected && styles.selected
+                    }`}
+                    onClick={() => handleTick(opt, selected)}
+                    disabled={disable}
+                  ></button> */}
+                  {/* {selected && (
                     <button
                       className={styles.deselect}
                       onClick={() => handleDeselect(opt)}
                     >
                       X
                     </button>
-                  )}
+                  )} */}
                 </div>
               );
             })}

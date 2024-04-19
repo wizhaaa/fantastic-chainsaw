@@ -4,13 +4,19 @@
   justify-content: center;
   align-items: center;
 
-  padding: 40px 0;
-  /* min-width: 100vw; */
-  /* max-width: 1440px; */
+  width: 100%;
 
   color: black;
 
   overflow-y: scroll;
+
+  /* background-color: rgb(167, 167, 167); */
+}
+
+.header {
+  width: 100%;
+  height: 60px;
+  background: rgb(225, 225, 225);
 }
 
 .row {
@@ -19,16 +25,14 @@
   width: 100%;
   justify-content: space-between;
   /* margin: 32px 32px; */
-
-  border-radius: 10px;
-  padding: 8px;
 }
 
 .column {
   display: flex;
   flex-flow: column;
-  max-height: 800px;
+  height: 100vh;
   overflow-y: scroll;
+  width: 100%;
 }
 
 .entry {
