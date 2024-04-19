@@ -75,6 +75,8 @@
   margin: 4px 0;
   max-height: 177px;
   overflow-y: scroll;
+
+  width: 173px;
 }
 
 .menuitem {

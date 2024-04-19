@@ -56,7 +56,7 @@ const VariableMenu = (props: {
           }`}
           onClick={() => handleSelect(opt)}
         >
-          {opt.value} [{opt.selected.toString()}]
+          {opt.value}
         </div>
       ))}
     </div>
@@ -78,7 +78,7 @@ const ValueMenu = (props: {
           onClick={() => handleSelect(opt.value)}
         >
           <div className={`${opt.selected ? styles.checked : styles.box} `} />
-          {opt.value} | [{opt.selected.toString()}]
+          {opt.value}
         </div>
       ))}
     </div>
@@ -94,29 +94,6 @@ const FilterRow = (props: RowProps) => {
   const [values, setValues] = useState<Value[]>(filter_values);
 
   const handleSelectVar = (newVariable: Option) => {
-    // check if another filter row selected this filter already
-    // 1. look at all variables => if var.selected & var.value = newVar then we just return early
-    // let selected = false;
-    // options.map((opt) => {
-    //   if (opt.selected && opt.value === newVariable.value) selected = true;
-    // });
-    // if (selected) return;
-
-    // if (newVariable.value !== currVariable?.value) setSelectedVals([]);
-
-    // // is not selected before
-    // newVariable.selected = !newVariable.selected;
-
-    // setVarDrop(false);
-    // const newOptions = options.map((opt) => {
-    //   if (newVariable.value === opt.value) return newVariable;
-    //   else if (opt.value === currVariable?.value)
-    //     return {...opt, selected: false};
-    //   else return opt;
-    // });
-    // if (newVariable.selected) setCurrVariable(newVariable);
-    // else setCurrVariable(null);
-    // setOptions(newOptions);
     updateVariable(index, newVariable);
     setVarDrop(false);
   };
