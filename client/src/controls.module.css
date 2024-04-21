@@ -134,3 +134,10 @@ input[type="checkbox"]:not(:checked) {
     cursor: pointer;
   }
 }
+.main {
+  color: #000;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
