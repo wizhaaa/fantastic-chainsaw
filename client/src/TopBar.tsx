@@ -12,6 +12,7 @@ export const TopBar = () => {
   const [startDate, setStartDate] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);
 
+
   return (
     <div className={styles.container}>
       <div className={styles.title}>{tableName}</div>
@@ -20,7 +21,7 @@ export const TopBar = () => {
           <label htmlFor="start">Start:</label>
           <DatePicker
             className={styles.date}
-            placeholderText="MM DD YYYY"
+            placeholderText="MM | DD | YYYY"
             selected={startDate}
             onChange={(date: Date | null) => setStartDate(date)}
           />
@@ -30,7 +31,7 @@ export const TopBar = () => {
           <label htmlFor="end">End:</label>
           <DatePicker
             className={styles.date}
-            placeholderText="MM DD YYYY"
+            placeholderText="MM | DD | YYYY"
             selected={endDate}
             onChange={(date: Date | null) => setEndDate(date)}
           />

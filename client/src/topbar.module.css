@@ -78,6 +78,8 @@ select {
 }
 
 .date{
+  margin: 0px;
+  padding: 0px;
   border-radius: 5px;
   border: 1.5px solid rgba(0, 0, 0, 0.2);
   background: rgba(57, 57, 57, 0.05);
@@ -90,5 +92,16 @@ select {
   font-style: normal;
   font-weight: 400;
   line-height: normal;
-  width: 152px;
+  text-align: center;
+  max-width: 152px;
+}
+
+.date::placeholder{
+  color: #000;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-align: center;
+  max-width: 152px;
 }
