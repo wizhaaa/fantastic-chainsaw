@@ -1,0 +1,48 @@
+.row {
+  display: flex;
+  flex-flow: row nowrap;
+  gap: 4px;
+  width: 100%;
+  margin: 1px;
+}
+
+.col {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 8px;
+  padding: 8px 4px;
+}
+
+.container {
+  width: 100%;
+  background: #ffffff;
+  overflow-x: scroll;
+  height: 100%;
+  /* display: flex; */
+}
+
+table {
+  width: 100%;
+  border-radius: pink;
+  border-collapse: collapse;
+}
+
+thead {
+  background-color: #ccc;
+  border-radius: 10px;
+  border: 1px solid transparent;
+}
+
+tr {
+  border-bottom: 1px solid #ddd;
+  height: 36px;
+}
+
+tr:hover {
+  background-color: #eee;
+}
+
+td {
+  text-align: center;
+  border-right: 1px solid #ddd;
+}

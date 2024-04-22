@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import styles from "./controls.module.css";
 import { DragOption } from "./Option";
 
-import { Option } from "./types";
+import {Option, FilterRow, QueryType} from "./types";
 
 import { AddModal } from "./AddModal";
 import { Filters } from "./Filters";
@@ -23,7 +23,12 @@ import {
 } from "@dnd-kit/core";
 import { arrayMove, SortableContext } from "@dnd-kit/sortable";
 
-export const Controls = () => {
+type PropsType = {
+  setQuery: (q: QueryType) => void;
+};
+
+export const Controls = (props: PropsType) => {
+  const {setQuery} = props;
   const sensors = useSensors(useSensor(PointerSensor));
   const [activeItem, setActiveItem] = useState<Option | null>(null);
 
@@ -103,8 +108,14 @@ export const Controls = () => {
   const [rows, setRows] = useState<Option[]>([]);
   const [columns, setColumns] = useState<Option[]>([]);
 
+  // Group Bys
   const [rowsTable, setRowsTable] = useState<string | null>(null);
+  // Select Clause
   const [colsTable, setColsTable] = useState<string | null>(null);
+  // Filters:
+  const [filterRows, setFilterRows] = useState<FilterRow[]>([
+    {variable: null, values: []},
+  ]);
 
   const [showAddRowModal, setShowAddRowModal] = useState(false);
   const [showAddColModal, setShowAddColModal] = useState(false);
@@ -128,111 +139,117 @@ export const Controls = () => {
   }
 
   useEffect(() => {
-    setRows([]);
-  }, []);
+    console.log("Query Updated");
+    setQuery({
+      select: columns,
+      groupby: rows,
+      filters: filterRows,
+    });
+  }, [rows, columns, filterRows, setQuery]);
 
   return (
-    <>
-      <div className={styles.controls}>
-        <AddModal
-          allOptions={all_options}
-          display={showAddRowModal}
-          setDisplay={setShowAddRowModal}
-          selectedOptions={rows}
-          setOptions={setRows}
-          currTable={rowsTable}
-          setCurrTable={setRowsTable}
-          otherTable={colsTable}
-        />
-        <AddModal
-          allOptions={all_options}
-          display={showAddColModal}
-          setDisplay={setShowAddColModal}
-          selectedOptions={columns}
-          setOptions={setColumns}
-          currTable={colsTable}
-          setCurrTable={setColsTable}
-          otherTable={rowsTable}
-        />
-        <div> Current Query: </div>
-        <div> Group Bys (rows) : </div>
-        <div> {rows.map((row) => `[${row.value}]`)}</div>
-        <div> Select clause (cols) : </div>
-        <div> {columns.map((col) => `[${col.value}]`)}</div>
+    <div className={styles.controls}>
+      <AddModal
+        allOptions={all_options}
+        display={showAddRowModal}
+        setDisplay={setShowAddRowModal}
+        selectedOptions={rows}
+        setOptions={setRows}
+        currTable={rowsTable}
+        setCurrTable={setRowsTable}
+        otherTable={colsTable}
+      />
+      <AddModal
+        allOptions={all_options}
+        display={showAddColModal}
+        setDisplay={setShowAddColModal}
+        selectedOptions={columns}
+        setOptions={setColumns}
+        currTable={colsTable}
+        setCurrTable={setColsTable}
+        otherTable={rowsTable}
+      />
+      <div> Current Query: </div>
+      <div> Group Bys (rows) : </div>
+      <div> {rows.map((row) => `[${row.value}]`)}</div>
+      <div> Select clause (cols) : </div>
+      <div> {columns.map((col) => `[${col.value}]`)}</div>
 
-        <div className={styles.title}> Filter Results </div>
-        <div className={styles.searchcontainer}>
-          <input
-            type="text"
-            placeholder="ETF, Stock, Desk A, etc"
-            className={styles.searchinput}
-          />
-        </div>
-        <div className={styles.row}>
-          <DndContext
-            sensors={sensors}
-            collisionDetection={closestCorners}
-            onDragEnd={handleDragEnd}
-            onDragStart={handleDragStart}
-            onDragMove={handleDragMove}
-          >
-            <SortableContext items={rows}>
-              <div className={styles.column}>
-                <div className={styles.headerrow}>
-                  <div className={styles.title}> Rows </div>
-                  <button className={styles.addbutton} onClick={addRow}>
-                    <img src={addicon} alt="add" />
-                  </button>
-                </div>
-                <div className={styles.groupbubble}>
-                  {rows.map((option, i) => {
-                    return <DragOption key={i} option={option} />;
-                  })}
-                </div>
-                <div className={styles.clearall} onClick={clearRows}>
-                  <img src={trashicon} alt="trash icon" />
-                  Clear All
-                </div>
-              </div>
-            </SortableContext>
-            <DragOverlay>
-              {activeItem && <DragOption option={activeItem} />}
-            </DragOverlay>
-          </DndContext>
-          <DndContext
-            sensors={sensors}
-            collisionDetection={closestCorners}
-            onDragEnd={handleDragEnd}
-            onDragStart={handleDragStart}
-            onDragMove={handleDragMoveColumn}
-          >
-            <SortableContext items={rows}>
-              <div className={styles.column}>
-                <div className={styles.headerrow}>
-                  <div className={styles.title}> Columns </div>
-                  <button className={styles.addbutton} onClick={addColumn}>
-                    <img src={addicon} alt="add" />
-                  </button>
-                </div>
-                <div className={styles.groupbubble}>
-                  {columns.map((option, i) => {
-                    return <DragOption key={i} option={option} />;
-                  })}
-                </div>
-                <div className={styles.clearall} onClick={clearCols}>
-                  <img src={trashicon} alt="trash icon" />
-                  Clear All
-                </div>
-              </div>
-            </SortableContext>
-            <DragOverlay>
-              {activeItem && <DragOption option={activeItem} />}
-            </DragOverlay>
-          </DndContext>
-        </div>
-        <Filters options={all_options} />
+      <div className={styles.title}> Filter Results </div>
+      <div className={styles.searchcontainer}>
+        <input
+          type="text"
+          placeholder="ETF, Stock, Desk A, etc"
+          className={styles.searchinput}
+        />
       </div>
-    </>
+      <div className={styles.row}>
+        <DndContext
+          sensors={sensors}
+          collisionDetection={closestCorners}
+          onDragEnd={handleDragEnd}
+          onDragStart={handleDragStart}
+          onDragMove={handleDragMove}
+        >
+          <SortableContext items={rows}>
+            <div className={styles.column}>
+              <div className={styles.headerrow}>
+                <div className={styles.title}> Rows </div>
+                <button className={styles.addbutton} onClick={addRow}>
+                  <img src={addicon} alt="add" />
+                </button>
+              </div>
+              <div className={styles.groupbubble}>
+                {rows.map((option, i) => {
+                  return <DragOption key={i} option={option} />;
+                })}
+              </div>
+              <div className={styles.clearall} onClick={clearRows}>
+                <img src={trashicon} alt="trash icon" />
+                Clear All
+              </div>
+            </div>
+          </SortableContext>
+          <DragOverlay>
+            {activeItem && <DragOption option={activeItem} />}
+          </DragOverlay>
+        </DndContext>
+        <DndContext
+          sensors={sensors}
+          collisionDetection={closestCorners}
+          onDragEnd={handleDragEnd}
+          onDragStart={handleDragStart}
+          onDragMove={handleDragMoveColumn}
+        >
+          <SortableContext items={rows}>
+            <div className={styles.column}>
+              <div className={styles.headerrow}>
+                <div className={styles.title}> Columns </div>
+                <button className={styles.addbutton} onClick={addColumn}>
+                  <img src={addicon} alt="add" />
+                </button>
+              </div>
+              <div className={styles.groupbubble}>
+                {columns.map((option, i) => {
+                  return <DragOption key={i} option={option} />;
+                })}
+              </div>
+              <div className={styles.clearall} onClick={clearCols}>
+                <img src={trashicon} alt="trash icon" /> Clear All
+              </div>
+            </div>
+          </SortableContext>
+          <DragOverlay>
+            {activeItem && <DragOption option={activeItem} />}
+          </DragOverlay>
+        </DndContext>
+      </div>
+      <Filters
+        options={all_options}
+        filterRows={filterRows}
+        setFilterRows={setFilterRows}
+      />
+    </div>
   );
 
   function getColumnById(id: string | number) {
