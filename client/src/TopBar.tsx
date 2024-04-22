@@ -12,7 +12,6 @@ export const TopBar = () => {
   const [startDate, setStartDate] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);
 
-
   return (
     <div className={styles.container}>
       <div className={styles.title}>{tableName}</div>

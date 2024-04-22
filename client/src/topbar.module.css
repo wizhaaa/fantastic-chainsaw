@@ -77,7 +77,7 @@ select {
   line-height: normal;
 }
 
-.date{
+.date {
   margin: 0px;
   padding: 0px;
   border-radius: 5px;
@@ -96,7 +96,7 @@ select {
   max-width: 152px;
 }
 
-.date::placeholder{
+.date::placeholder {
   color: #000;
   font-size: 16px;
   font-style: normal;
