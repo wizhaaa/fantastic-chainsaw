@@ -1,11 +1,16 @@
 import { useState } from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import { Divider } from "./Divider";
 import styles from "./topbar.module.css";
+
 //type Props = {}
 
 export const TopBar = () => {
   const [tableName, setTableName] = useState("Table Name");
   const [valAtRisk, setValAtRisk] = useState(0);
+  const [startDate, setStartDate] = useState<Date | null>(null);
+  const [endDate, setEndDate] = useState<Date | null>(null);
 
   return (
     <div className={styles.container}>
@@ -13,12 +18,22 @@ export const TopBar = () => {
       <div className={styles.bar}>
         <div>
           <label htmlFor="start">Start:</label>
-          <input type="date" id="start" name="start" />
+          <DatePicker
+            className={styles.date}
+            placeholderText="MM DD YYYY"
+            selected={startDate}
+            onChange={(date: Date | null) => setStartDate(date)}
+          />
         </div>
 
         <div>
           <label htmlFor="end">End:</label>
-          <input type="date" id="end" name="end" />
+          <DatePicker
+            className={styles.date}
+            placeholderText="MM DD YYYY"
+            selected={endDate}
+            onChange={(date: Date | null) => setEndDate(date)}
+          />
         </div>
 
         <Divider />
@@ -32,7 +47,7 @@ export const TopBar = () => {
 
         <Divider />
 
-        <div className={styles.var}>VaR: {valAtRisk}</div>
+        <div className={styles.var}>VaR: {valAtRisk} USD</div>
       </div>
     </div>
   );
