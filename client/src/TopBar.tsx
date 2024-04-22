@@ -1,3 +1,4 @@
+import { Divider } from "./Divider";
 import styles from "./topbar.module.css";
 //type Props = {}
 
@@ -16,12 +17,16 @@ export const TopBar = () => {
           <input type="date" id="end" name="end" />
         </div>
 
+        <Divider />
+
         <div>
           <label htmlFor="confidence">Confidence Level:</label>
           <select id="confidence" name="confidence">
             <option value="95%">95%</option>
           </select>
         </div>
+
+        <Divider />
 
         <div className={styles.var}>VaR: 12, 345 USD</div>
       </div>
