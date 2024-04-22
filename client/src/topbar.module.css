@@ -1,0 +1,30 @@
+.container {
+  line-height: normal;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.title {
+  color: #000;
+  //font-family: Roboto;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+}
+
+.bar {
+  display: flex;
+  height: 54px;
+  padding: 10px 64px;
+  justify-content: center;
+  align-items: center;
+  gap: 80px;
+  border-radius: 50px;
+  background: #f0f4fb;
+  width: 100%;
+}
+
+.title {
+}
