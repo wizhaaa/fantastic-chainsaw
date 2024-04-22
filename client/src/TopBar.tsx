@@ -7,8 +7,8 @@ import styles from "./topbar.module.css";
 //type Props = {}
 
 export const TopBar = () => {
-  const [tableName, setTableName] = useState("Table Name");
-  const [valAtRisk, setValAtRisk] = useState(0);
+  const [tableName, ] = useState("Table Name");
+  const [valAtRisk, ] = useState(0);
   const [startDate, setStartDate] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);
 
