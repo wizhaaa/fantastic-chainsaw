@@ -1,6 +1,7 @@
 import styles from "./dashboard.module.css";
 
 import {Controls} from "./Controls";
+import { TopBar } from "./TopBar";
 
 const elements = Array.from({length: 40}, (_, index) => (
   <div key={index}>
@@ -11,10 +12,11 @@ const elements = Array.from({length: 40}, (_, index) => (
 export const Dashboard = () => {
   return (
     <div className={styles.page}>
-      <div className={styles.header}></div>
+      <div className={styles.header}>
+        <TopBar/>
+      </div>
       <div className={styles.row}>
         <div className={styles.column}>{elements}</div>
-
         <Controls />
       </div>
     </div>
