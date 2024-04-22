@@ -187,15 +187,7 @@ const FilterRow = (props: RowProps) => {
 };
 
 export const Filters = (props: Props) => {
-  const {options: initialOptions} = props;
-  const [filterRows, setFilterRows] = useState<FilterRow[]>([
-    {variable: null, values: []},
-  ]);
-
-  type FilterRow = {
-    variable: Option | null;
-    values: string[];
-  };
+  const {options: initialOptions, filterRows, setFilterRows} = props;
 
   function addFilterRow() {
     if (filterRows.length === 0 || filterRows.slice(-1)[0].values.length > 0) {
@@ -272,6 +264,8 @@ export const Filters = (props: Props) => {
 
 type Props = {
   options: Option[];
+  filterRows: FilterRow[];
+  setFilterRows: (rows: FilterRow[]) => void;
 };
 
 type RowProps = {
@@ -281,4 +275,9 @@ type RowProps = {
   updateVariable: (i: number, v: Option) => void;
   updateValues: (i: number, v: string[]) => void;
   options: Option[];
+};
+
+type FilterRow = {
+  variable: Option | null;
+  values: string[];
 };

@@ -79,7 +79,7 @@
   max-height: 177px;
   overflow-y: scroll;
 
-  width: 173px;
+  width: 100%;
 }
 
 .menuitem {

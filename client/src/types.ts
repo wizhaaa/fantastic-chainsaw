@@ -5,3 +5,14 @@ export type Option = {
   selected: boolean;
   columnname: string;
 };
+
+export type FilterRow = {
+  variable: Option | null;
+  values: string[];
+};
+
+export type QueryType = {
+  select: Option[];
+  groupby: Option[];
+  filters: FilterRow[];
+};
