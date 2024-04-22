@@ -14,7 +14,8 @@
   display: flex;
   flex-flow: row nowrap;
 
-  gap: 8px;
+  gap: 16px;
+  padding-right: 24px;
 }
 
 .column {

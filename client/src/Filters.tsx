@@ -230,18 +230,6 @@ export const Filters = (props: Props) => {
           onClick={addFilterRow}
         />
       </div>
-      <div> Current Where Clause: </div>
-      <div>
-        {filterRows.map((filter, i) => (
-          <div key={filter.variable?.value}>
-            <div>
-              {i} : {filter.variable?.value || "null"}
-            </div>
-            <div>{filter.values.map((val) => val).join(", ")}</div>
-          </div>
-        ))}
-      </div>
-
       <div className={styles.filtercol}>
         {filterRows.map((row, i) => {
           return (

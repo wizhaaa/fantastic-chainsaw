@@ -11,7 +11,7 @@
 .row {
   display: flex;
   flex-flow: row nowrap;
-  gap: 8px;
+  gap: 16px;
 }
 
 .filtercol {
@@ -40,8 +40,8 @@
   flex-flow: row nowrap;
   align-items: center;
   justify-content: space-between;
-  /* width: 100%; */
-  width: 173px;
+  width: 100%;
+  /* width: 173px; */
 }
 
 .dropdown-disabled {

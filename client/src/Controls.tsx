@@ -169,11 +169,6 @@ export const Controls = (props: PropsType) => {
         setCurrTable={setColsTable}
         otherTable={rowsTable}
       />
-      <div> Current Query: </div>
-      <div> Group Bys (rows) : </div>
-      <div> {rows.map((row) => `[${row.value}]`)}</div>
-      <div> Select clause (cols) : </div>
-      <div> {columns.map((col) => `[${col.value}]`)}</div>
 
       <div className={styles.title}> Filter Results </div>
       <div className={styles.searchcontainer}>
