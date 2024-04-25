@@ -1,8 +1,8 @@
-[{
+export const data = [{
   "desk": "GRGOSY13",
   "pod": "470AI5D8",
   "assetclass": "Commodity",
-  "percentile_approx(CAST(pnl AS DOUBLE), 0.05, 10000)": -233.97000122070312
+  "percentile_approx(CAST(pnl AS DOUBLE), 0.05, 10000)": -233.9700012207031
 }, {
   "desk": "GRGOSY13",
   "pod": "24YHWXKN",
@@ -12,7 +12,7 @@
   "desk": "QADT497D",
   "pod": "82PB7ETJ",
   "assetclass": "Digital",
-  "percentile_approx(CAST(pnl AS DOUBLE), 0.05, 10000)": -222.35000610351562
+  "percentile_approx(CAST(pnl AS DOUBLE), 0.05, 10000)": -222.3500061035156
 }, {
   "desk": "ANY97MQX",
   "pod": "9ILTXJVY",
@@ -132,7 +132,7 @@
   "desk": "ANY97MQX",
   "pod": "SFIM8TCJ",
   "assetclass": "Digital",
-  "percentile_approx(CAST(pnl AS DOUBLE), 0.05, 10000)": -238.35000610351562
+  "percentile_approx(CAST(pnl AS DOUBLE), 0.05, 10000)": -238.3500061035156
 }, {
   "desk": "YAMJ1RH4",
   "pod": "DJLMXYLQ",
@@ -242,7 +242,7 @@
   "desk": "GRGOSY13",
   "pod": "470AI5D8",
   "assetclass": "Mortgage",
-  "percentile_approx(CAST(pnl AS DOUBLE), 0.05, 10000)": -226.58999633789062
+  "percentile_approx(CAST(pnl AS DOUBLE), 0.05, 10000)": -226.5899963378906
 }, {
   "desk": "QADT497D",
   "pod": "4WWQPZ3H",
@@ -252,7 +252,7 @@
   "desk": "GRGOSY13",
   "pod": "7XBP9CID",
   "assetclass": "Commodity",
-  "percentile_approx(CAST(pnl AS DOUBLE), 0.05, 10000)": -233.97000122070312
+  "percentile_approx(CAST(pnl AS DOUBLE), 0.05, 10000)": -233.9700012207031
 }, {
   "desk": "ANY97MQX",
   "pod": "9ILTXJVY",
