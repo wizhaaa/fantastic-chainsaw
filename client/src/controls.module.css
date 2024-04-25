@@ -27,7 +27,12 @@
 }
 
 .title {
-  font-weight: 700;
+  font-weight: 600;
+}
+
+.controlstitle {
+  font-size: 24px;
+  font-weight: 500;
 }
 
 .searchcontainer {
@@ -144,16 +149,30 @@ input[type="checkbox"]:not(:checked) {
   background-color: grey;
 }
 
+.cleartext {
+  display: none;
+}
+
 .clearall {
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
   gap: 4px;
+  font-size: 8px;
+  opacity: 0.2;
 
   cursor: pointer;
 
   & > img {
     width: 12px;
+  }
+}
+
+.clearall:hover {
+  opacity: 1;
+  & > .cleartext {
+    display: block;
+    opacity: 0.2;
   }
 }
 

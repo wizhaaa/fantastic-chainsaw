@@ -184,7 +184,7 @@ export const Controls = (props: PropsType) => {
         setCurrTable={setColsTable}
         otherTable={rowsTable}
       />
-
+      {/* 
       <div className={styles.title}> Filter Results </div>
       <div className={styles.searchcontainer}>
         <input
@@ -192,7 +192,8 @@ export const Controls = (props: PropsType) => {
           placeholder="ETF, Stock, Desk A, etc"
           className={styles.searchinput}
         />
-      </div>
+      </div> */}
+      <div className={styles.controlstitle}> Controls </div>
       <div className={styles.row}>
         <DndContext
           sensors={sensors}
@@ -227,7 +228,7 @@ export const Controls = (props: PropsType) => {
 
               <div className={styles.clearall} onClick={clearRows}>
                 <img src={trashicon} alt="trash icon" />
-                Clear All
+                <span className={styles.cleartext}>Clear All</span>
               </div>
             </div>
           </SortableContext>
@@ -272,7 +273,8 @@ export const Controls = (props: PropsType) => {
               )}
 
               <div className={styles.clearall} onClick={clearCols}>
-                <img src={trashicon} alt="trash icon" /> Clear All
+                <img src={trashicon} alt="trash icon" />
+                <span className={styles.cleartext}>Clear All</span>
               </div>
             </div>
           </SortableContext>
