@@ -138,6 +138,21 @@ export const Controls = (props: PropsType) => {
     setColsTable(null);
   }
 
+  function handleDeselectRow(deselect: Option) {
+    console.log("deselecting row");
+    deselect.selected = false;
+    if (rows.length === 1) setRowsTable(null);
+    const newOptions = rows.filter((opt) => opt.value != deselect.value);
+    setRows(newOptions);
+  }
+
+  function handleDeselectCol(deselect: Option) {
+    deselect.selected = false;
+    if (columns.length === 1) setColsTable(null);
+    const newOptions = columns.filter((opt) => opt.value != deselect.value);
+    setColumns(newOptions);
+  }
+
   useEffect(() => {
     console.log("Query Updated");
     setQuery({
@@ -194,11 +209,22 @@ export const Controls = (props: PropsType) => {
                   <img src={addicon} alt="add" />
                 </button>
               </div>
-              <div className={styles.groupbubble}>
-                {rows.map((option, i) => {
-                  return <DragOption key={i} option={option} />;
-                })}
-              </div>
+              {rows.length > 0 ? (
+                <div className={styles.groupbubble}>
+                  {rows.map((option, i) => {
+                    return (
+                      <DragOption
+                        key={i}
+                        option={option}
+                        handleDeselect={handleDeselectRow}
+                      />
+                    );
+                  })}
+                </div>
+              ) : (
+                <div className={styles.emptybubble}> Add a variable </div>
+              )}
+
               <div className={styles.clearall} onClick={clearRows}>
                 <img src={trashicon} alt="trash icon" />
                 Clear All
@@ -206,7 +232,12 @@ export const Controls = (props: PropsType) => {
             </div>
           </SortableContext>
           <DragOverlay>
-            {activeItem && <DragOption option={activeItem} />}
+            {activeItem && (
+              <DragOption
+                option={activeItem}
+                handleDeselect={handleDeselectRow}
+              />
+            )}
           </DragOverlay>
         </DndContext>
         <DndContext
@@ -224,18 +255,34 @@ export const Controls = (props: PropsType) => {
                   <img src={addicon} alt="add" />
                 </button>
               </div>
-              <div className={styles.groupbubble}>
-                {columns.map((option, i) => {
-                  return <DragOption key={i} option={option} />;
-                })}
-              </div>
+              {columns.length > 0 ? (
+                <div className={styles.groupbubble}>
+                  {columns.map((option, i) => {
+                    return (
+                      <DragOption
+                        key={i}
+                        option={option}
+                        handleDeselect={handleDeselectCol}
+                      />
+                    );
+                  })}
+                </div>
+              ) : (
+                <div className={styles.emptybubble}> Add a variable </div>
+              )}
+
               <div className={styles.clearall} onClick={clearCols}>
                 <img src={trashicon} alt="trash icon" /> Clear All
               </div>
             </div>
           </SortableContext>
           <DragOverlay>
-            {activeItem && <DragOption option={activeItem} />}
+            {activeItem && (
+              <DragOption
+                option={activeItem}
+                handleDeselect={handleDeselectCol}
+              />
+            )}
           </DragOverlay>
         </DndContext>
       </div>
