@@ -1,11 +1,11 @@
-import React, { useEffect, useRef, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
 import DatePicker from "react-datepicker";
 import { DateDivider } from "./Divider";
 import styles from "./topbar.module.css";
 
 type Props = {
-  date: Date;
-  setDate: (value: React.SetStateAction<Date>) => void;
+  date: Date | undefined;
+  setDate: Dispatch<SetStateAction<Date | undefined>>;
 };
 
 export const TopDatePicker = ({ date, setDate }: Props) => {
@@ -13,20 +13,22 @@ export const TopDatePicker = ({ date, setDate }: Props) => {
   const [month, setMonth] = useState<string>("MM");
   const [year, setYear] = useState<string>("YYYY");
 
-  const dayRef = useRef(null);
-  const monthRef = useRef(null);
-  const yearRef = useRef(null);
+  const dayRef = useRef<HTMLInputElement>(null);
+  const monthRef = useRef<HTMLInputElement>(null);
+  const yearRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    dayRef.current.focus();
+    if (dayRef && dayRef.current) {
+      dayRef.current.focus();
+    }
   }, [day]);
 
   useEffect(() => {
-    monthRef.current.focus();
+    monthRef.current!.focus();
   }, [month]);
 
   useEffect(() => {
-    yearRef.current.focus();
+    yearRef.current!.focus();
   }, [year]);
 
   const updateDate = () => {
@@ -52,7 +54,7 @@ export const TopDatePicker = ({ date, setDate }: Props) => {
     setDate(date);
   };
 
-  const CustomInput = ({ value, onClick }) => (
+  const CustomInput = ({ onClick }: { value: string; onClick: () => void }) => (
     <div className={styles.date} onClick={onClick}>
       <input
         type="text"
@@ -81,26 +83,13 @@ export const TopDatePicker = ({ date, setDate }: Props) => {
     </div>
   );
 
-  const updateDatePart = (val: string, datePart: string) => {
-    const value = parseInt(val, 10);
-    const newDate = new Date(date);
-    if (datePart === "day") {
-      newDate.setDate(value);
-    } else if (datePart === "month") {
-      newDate.setMonth(value - 1); // JavaScript months are 0-indexed
-    } else if (datePart === "year") {
-      newDate.setFullYear(value);
-    }
-    setDate(newDate);
-  };
-
   return (
     <DatePicker
       className={styles.date}
       placeholderText="MM/DD/YYYY"
       selected={date}
       onChange={changeDate}
-      customInput={<CustomInput />}
+      customInput={<CustomInput value="" onClick={()=>{}}/>}
     />
   );
 };
