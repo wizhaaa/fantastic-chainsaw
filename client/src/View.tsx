@@ -1,6 +1,6 @@
+import React, { useState, useEffect } from "react";
 import styles from "./view.module.css";
-
-import {data} from "../data/fake_data";
+import { data } from "../data/fake_data";
 
 type RowProps = {
   row: {
@@ -12,7 +12,7 @@ type RowProps = {
 };
 
 const Row = (props: RowProps) => {
-  const {row} = props;
+  const { row } = props;
   // const row = data[i];
 
   return (
@@ -30,6 +30,21 @@ const Row = (props: RowProps) => {
 };
 
 export const View = () => {
+  useEffect(() => {
+    const table = document.querySelector(`.${styles.container} table`);
+    let headerCell = null;
+    for (let row of table.rows) {
+      let firstCell = row.cells[0];
+
+      if (headerCell === null || firstCell.innerText !== headerCell.innerText) {
+        headerCell = firstCell;
+      } else {
+        headerCell.rowSpan++;
+        firstCell.remove();
+      }
+    }
+  }, []);
+
   return (
     <div className={styles.container}>
       <table cellSpacing={0}>
@@ -42,8 +57,8 @@ export const View = () => {
           </tr>
         </thead>
         <tbody>
-          {data.map((row) => (
-            <Row row={row} />
+          {data.map((row, index) => (
+            <Row key={index} row={row} />
           ))}
         </tbody>
       </table>
