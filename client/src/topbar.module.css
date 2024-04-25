@@ -77,6 +77,10 @@ select {
   line-height: normal;
 }
 
+select:focus {
+  background: white;
+}
+
 .date {
   margin: 0px;
   padding: 0px;
@@ -104,4 +108,8 @@ select {
   line-height: normal;
   text-align: center;
   max-width: 152px;
+}
+
+.date:focus {
+  background: white;
 }
