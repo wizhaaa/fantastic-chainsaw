@@ -57,8 +57,8 @@ export const View = () => {
           </tr>
         </thead>
         <tbody>
-          {data.map((row, index) => (
-            <Row key={index} row={row} />
+          {data.map((row) => (
+            <Row row={row} />
           ))}
         </tbody>
       </table>
