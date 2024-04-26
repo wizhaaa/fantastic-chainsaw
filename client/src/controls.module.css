@@ -235,3 +235,14 @@ input[type="checkbox"]:not(:checked) {
     cursor: pointer;
   }
 }
+
+.applybutton {
+  margin-top: 124px;
+  background-color: #fff;
+  font-weight: 500 !important;
+}
+
+.applybutton:hover {
+  background-color: rgb(20, 50, 118);
+  color: #fff;
+}

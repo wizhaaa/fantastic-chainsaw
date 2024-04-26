@@ -134,3 +134,74 @@ select:focus {
 .date:focus {
   background: white;
 }
+
+.dropdown {
+  width: 88px;
+  height: 35px;
+  font-size: 16px;
+  background: rgba(57, 57, 57, 0.05);
+
+  border: 1.5px solid rgba(0, 0, 0, 0.2);
+
+  border-radius: 5px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  cursor: pointer;
+}
+
+.droppeddown {
+  background: #fff;
+  border: 1.5px solid #0955cb;
+  border-radius: 5px;
+  width: 88px;
+  height: 35px;
+  font-size: 16px;
+
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.menu {
+  position: absolute;
+  top: 50;
+  left: 10;
+  background: #fff;
+  border: 1.5px solid #0955cb;
+  border-radius: 5px;
+  width: 88px;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 8px;
+  cursor: pointer;
+}
+
+.item {
+  width: 100%;
+  padding: 10px 8px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.item:hover {
+  background-color: #f5f5f5;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.varwrapper {
+  position: relative;
+}
+
+.wrap {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+}
