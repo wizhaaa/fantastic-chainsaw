@@ -35,9 +35,11 @@ export const AddModal = (props: Props) => {
     setOptions(newOptions);
   };
 
-  const handleTick = (option: Option, selected: boolean) => {
-    if (selected) handleDeselect(option);
-    else handleSelect(option);
+  const handleTick = (option: Option, selected: boolean, disable: boolean) => {
+    if (!disable) {
+      if (selected) handleDeselect(option);
+      else handleSelect(option);
+    }
   };
 
   // const options = [1, 2, 3, 4];
@@ -58,7 +60,10 @@ export const AddModal = (props: Props) => {
               // if (opt.table === "both") disable = false;
 
               return (
-                <div className={`${styles.row} ${disable && styles.disabled}`}>
+                <div
+                  className={`${styles.row} ${disable && styles.disabled}`}
+                  onClick={() => handleTick(opt, selected, disable)}
+                >
                   {/* <input
                     className={`${styles.option} ${
                       selected && styles.selected
@@ -69,10 +74,7 @@ export const AddModal = (props: Props) => {
                     onClick={() => handleTick(opt, selected)}
                   /> */}
                   {selected && (
-                    <div
-                      className={styles.checkedbox}
-                      onClick={() => handleTick(opt, selected)}
-                    >
+                    <div className={styles.checkedbox}>
                       <img
                         className={styles.checkicon}
                         src={check}
@@ -80,14 +82,7 @@ export const AddModal = (props: Props) => {
                       />
                     </div>
                   )}
-                  {!selected && (
-                    <div
-                      className={styles.checkbox}
-                      onClick={() => {
-                        if (!disable) handleTick(opt, selected);
-                      }}
-                    />
-                  )}
+                  {!selected && <div className={styles.checkbox} />}
                   <label htmlFor={opt.value}>{opt.value}</label>
 
                   {/* <button

@@ -29,7 +29,28 @@ const Row = (props: RowProps) => {
   );
 };
 
-export const View = () => {
+function Loading() {
+  return (
+    <div className={styles.center}>
+      <div className={styles["lds-ring"]}>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+  );
+}
+
+function NoQuery() {
+  return (
+    <div className={styles.center}>
+      Please select some parameters to load data.
+    </div>
+  );
+}
+
+function Data() {
   return (
     <div className={styles.container}>
       <table cellSpacing={0}>
@@ -49,4 +70,16 @@ export const View = () => {
       </table>
     </div>
   );
+}
+
+export const View = (props: Props) => {
+  const {display} = props;
+  if (display === "none") return <NoQuery />;
+  else if (display === "loading") return <Loading />;
+  else if (display === "data") return <Data />;
+  else return <div></div>;
+};
+
+type Props = {
+  display: "none" | "loading" | "data";
 };

@@ -63,6 +63,11 @@
   gap: 6px;
 
   align-items: center;
+  cursor: pointer;
+}
+
+label {
+  cursor: pointer;
 }
 
 .deselect {
@@ -94,22 +99,23 @@ button:disabled {
 }
 
 .selected {
-  background: #212121;
+  /* background: #2f7cd3; */
   color: #f0f0f0;
 }
 
 .checkbox {
   width: 13.44px;
   height: 13.44px;
-  background: #d9d9d9;
-  border-radius: 3.1px;
+  background: transparent;
+  border-radius: 2px;
+  border: 1.5px solid #8e8e8e;
 }
 
 .checkedbox {
   width: 13.44px;
   height: 13.44px;
-  background: #212121;
-  border-radius: 3.1px;
+  background: #0955cb;
+  border-radius: 2px;
 }
 
 .checkicon {

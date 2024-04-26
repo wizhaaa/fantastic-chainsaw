@@ -12,12 +12,16 @@ import {QueryType} from "./types";
 //   </div>
 // ));
 
+type Display = "none" | "loading" | "data";
+
 export const Dashboard = () => {
   const [query, setQuery] = useState<QueryType>({
     select: [],
     groupby: [],
     filters: [],
   });
+
+  const [display, setDisplay] = useState<Display>("none");
 
   useEffect(() => {
     let sqlquery = "S" + "ELECT ";
@@ -46,40 +50,13 @@ export const Dashboard = () => {
 
   return (
     <div className={styles.page}>
-      <div>
-        Current Query:
-        <div>
-          SELECT:{" "}
-          {query.select
-            .map((s) => [s.table, s.columnname].join(" "))
-            .join(", ")}
-        </div>
-        <div>
-          WHERE:
-          {query.filters.map((filter) => (
-            <div key={filter.variable?.value}>
-              <div>
-                {filter.variable?.table} {filter.variable?.value} =
-              </div>
-              <div>{filter.values.map((val) => val).join(", ")}</div>
-            </div>
-          ))}
-        </div>
-        <div>
-          GROUP BY
-          {query.groupby
-            .map((s) => [s.table, s.columnname].join(" "))
-            .join(", ")}
-        </div>
-      </div>
-
       <div className={styles.header}></div>
       <div className={styles.row}>
         <div className={styles.column}>
-          <View />
+          <View display={display} />
         </div>
 
-        <Controls setQuery={setQuery} />
+        <Controls setQuery={setQuery} setDisplay={setDisplay} />
       </div>
     </div>
   );

@@ -42,3 +42,12 @@
   border-radius: 10px;
   margin: 8px;
 }
+
+.code {
+  font-family: "Lucida Console", monospace;
+  color: #fff;
+  background: #1a1648;
+  border-radius: 4px;
+  padding: 16px;
+  width: 80%;
+}

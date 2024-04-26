@@ -23,12 +23,25 @@ import {
 } from "@dnd-kit/core";
 import {arrayMove, SortableContext} from "@dnd-kit/sortable";
 
+type Display = "none" | "loading" | "data";
+
 type PropsType = {
   setQuery: (q: QueryType) => void;
+  setDisplay: (s: Display) => void;
 };
 
 export const Controls = (props: PropsType) => {
-  const {setQuery} = props;
+  const {setQuery, setDisplay} = props;
+
+  function sleep(ms: number) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  }
+  async function handleApply() {
+    setDisplay("loading");
+    await sleep(1000);
+    setDisplay("data");
+  }
+
   const sensors = useSensors(useSensor(PointerSensor));
   const [activeItem, setActiveItem] = useState<Option | null>(null);
 
@@ -293,6 +306,7 @@ export const Controls = (props: PropsType) => {
         filterRows={filterRows}
         setFilterRows={setFilterRows}
       />
+      <button onClick={handleApply}> Apply </button>
     </div>
   );
 
