@@ -33,7 +33,6 @@ export const TopDatePicker = ({ date, setDate }: Props) => {
 
   const updateDate = () => {
     if (day && month && year) {
-      console.log(parseInt(year));
       const newDate = new Date(
         parseInt(year),
         parseInt(month) - 1,
@@ -41,7 +40,6 @@ export const TopDatePicker = ({ date, setDate }: Props) => {
       );
       if (!isNaN(newDate.getTime())) {
         // Check if the date is valid
-        console.log("hit");
         setDate(newDate);
       }
     }
@@ -86,7 +84,6 @@ export const TopDatePicker = ({ date, setDate }: Props) => {
   return (
     <DatePicker
       className={styles.date}
-      placeholderText="MM/DD/YYYY"
       selected={date}
       onChange={changeDate}
       customInput={<CustomInput value="" onClick={()=>{}}/>}
