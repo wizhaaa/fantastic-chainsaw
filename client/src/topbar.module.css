@@ -8,10 +8,17 @@
 
 .title {
   color: #000;
-
+  border: none;
   font-size: 24px;
   font-style: normal;
   font-weight: 400;
+}
+
+.titleSpan {
+  visibility: hidden,
+  position: absolute,
+  whiteSpace: pre,
+  fontSize: 25px
 }
 
 label {
