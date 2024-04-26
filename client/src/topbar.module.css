@@ -15,10 +15,10 @@
 }
 
 .titleSpan {
-  visibility: hidden,
-  position: absolute,
-  whiteSpace: pre,
-  fontSize: 25px
+  visibility: hidden;
+  position: absolute;
+  white-space: pre;
+  font-size: 25px;
 }
 
 label {
@@ -111,7 +111,7 @@ select:focus {
   margin: 0px;
   border: 0px;
 
-  background: rgba(57, 57, 57, 0.0);
+  background: rgba(57, 57, 57, 0);
 
   color: #000;
   font-size: 16px;
