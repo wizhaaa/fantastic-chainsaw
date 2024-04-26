@@ -1,0 +1,136 @@
+.container {
+  line-height: normal;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.title {
+  color: #000;
+  border: none;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+}
+
+.titleSpan {
+  visibility: hidden;
+  position: absolute;
+  white-space: pre;
+  font-size: 25px;
+}
+
+label {
+  color: rgba(0, 0, 0, 0.5);
+
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  padding-right: 8px;
+}
+
+.bar {
+  display: flex;
+  height: 54px;
+  padding: 10px 64px;
+  justify-content: center;
+  align-items: center;
+  gap: 80px;
+  border-radius: 50px;
+  background: #f0f4fb;
+  width: 100%;
+}
+
+.var {
+  color: #000;
+
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-align: center;
+}
+
+input[type="date"] {
+  border-radius: 5px;
+  border: 1.5px solid rgba(0, 0, 0, 0.2);
+  background: rgba(57, 57, 57, 0.05);
+  padding: 6px 16px;
+  align-items: flex-start;
+  gap: 8px;
+
+  color: #000;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+select {
+  padding: 6px 16px;
+  align-items: center;
+  gap: 16px;
+
+  border-radius: 5px;
+  border: 1.5px solid rgba(0, 0, 0, 0.2);
+  background: rgba(0, 0, 0, 0.05);
+
+  color: #000;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+select:focus {
+  background: white;
+}
+
+.date {
+  display: flex;
+  flex-direction: row;
+  padding: 6px 15px;
+  border-radius: 5px;
+  border: 1.5px solid rgba(0, 0, 0, 0.2);
+  background: rgba(57, 57, 57, 0.05);
+  align-items: center;
+  justify-content: center;
+  max-width: 152px;
+}
+
+.date input {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-width: 20px;
+
+  padding: 0px;
+  margin: 0px;
+  border: 0px;
+
+  background: rgba(57, 57, 57, 0);
+
+  color: #000;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-align: center;
+}
+
+.date::placeholder {
+  color: #000;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-align: center;
+  max-width: 152px;
+}
+
+.date:focus {
+  background: white;
+}

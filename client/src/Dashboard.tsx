@@ -3,6 +3,7 @@ import {useState, useEffect} from "react";
 import styles from "./dashboard.module.css";
 
 import {Controls} from "./Controls";
+import {TopBar} from "./TopBar";
 import {View} from "./View";
 
 import {QueryType} from "./types";
@@ -50,7 +51,9 @@ export const Dashboard = () => {
 
   return (
     <div className={styles.page}>
-      <div className={styles.header}></div>
+      <div className={styles.header}>
+        <TopBar />
+      </div>
       <div className={styles.row}>
         <div className={styles.column}>
           <View display={display} />
