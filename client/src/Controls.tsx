@@ -1,27 +1,27 @@
+import { useEffect, useState } from "react";
 import styles from "./controls.module.css";
-import {DragOption} from "./Option";
-import {useEffect, useState} from "react";
+import { DragOption } from "./Option";
 
 import {Option, FilterRow, QueryType} from "./types";
 
-import {AddModal} from "./AddModal";
-import {Filters} from "./Filters";
+import { AddModal } from "./AddModal";
+import { Filters } from "./Filters";
 
-import trashicon from "./assets/trash.svg";
 import addicon from "./assets/add.svg";
+import trashicon from "./assets/trash.svg";
 
 import {
+  closestCorners,
   DndContext,
+  DragEndEvent,
+  DragMoveEvent,
   DragOverlay,
+  DragStartEvent,
   PointerSensor,
   useSensor,
   useSensors,
-  DragEndEvent,
-  DragStartEvent,
-  closestCorners,
-  DragMoveEvent,
 } from "@dnd-kit/core";
-import {arrayMove, SortableContext} from "@dnd-kit/sortable";
+import { arrayMove, SortableContext } from "@dnd-kit/sortable";
 
 type PropsType = {
   setQuery: (q: QueryType) => void;
@@ -301,12 +301,12 @@ export const Controls = (props: PropsType) => {
   }
 
   function handleDragStart(event: DragStartEvent) {
-    const {active} = event;
+    const { active } = event;
     setActiveItem(active?.data?.current?.option);
   }
 
   function handleDragMove(event: DragMoveEvent) {
-    const {active, over} = event;
+    const { active, over } = event;
 
     // handle sorting
     if (active && over && active.id !== over.id) {
@@ -326,7 +326,7 @@ export const Controls = (props: PropsType) => {
   }
 
   function handleDragMoveColumn(event: DragMoveEvent) {
-    const {active, over} = event;
+    const { active, over } = event;
 
     // handle sorting
     if (active && over && active.id !== over.id) {
@@ -346,7 +346,7 @@ export const Controls = (props: PropsType) => {
   }
 
   function handleDragEnd(event: DragEndEvent) {
-    const {active, over} = event;
+    const { active, over } = event;
     if (over && active.id !== over.id) {
       console.log("Drag Ending");
     }

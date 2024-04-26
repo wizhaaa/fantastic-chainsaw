@@ -1,7 +1,7 @@
-import {BrowserRouter, Routes, Route} from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-import {Home} from "./Home";
-import {Dashboard} from "./Dashboard";
+import { Dashboard } from "./Dashboard";
+import { Home } from "./Home";
 
 function App() {
   return (

@@ -1,7 +1,7 @@
 import styles from "./filters.module.css";
-import { useState } from "react";
+import {useState} from "react";
 
-import { Option } from "./types";
+import {Option} from "./types";
 import dropdown from "./assets/dropdown.svg";
 import dropup from "./assets/dropup.svg";
 
@@ -31,7 +31,7 @@ const init = [
 ];
 
 const filter_values = init.map((val) => {
-  return { value: val, selected: false };
+  return {value: val, selected: false};
 });
 
 type Value = {
@@ -44,7 +44,7 @@ const VariableMenu = (props: {
   handleSelect: (opt: Option) => void;
   current: Option | null;
 }) => {
-  const { current, options, handleSelect } = props;
+  const {current, options, handleSelect} = props;
 
   return (
     <div className={styles.menu}>
@@ -67,7 +67,7 @@ const ValueMenu = (props: {
   options: Value[];
   handleSelect: (val: string) => void;
 }) => {
-  const { options, handleSelect } = props;
+  const {options, handleSelect} = props;
 
   return (
     <div className={styles.menu}>
@@ -86,8 +86,7 @@ const ValueMenu = (props: {
 };
 
 const FilterRow = (props: RowProps) => {
-  const { index, row, deleteRow, updateValues, updateVariable, options } =
-    props;
+  const {index, row, deleteRow, updateValues, updateVariable, options} = props;
 
   const [varDrop, setVarDrop] = useState<boolean>(false);
 
@@ -125,7 +124,7 @@ const FilterRow = (props: RowProps) => {
     }
 
     const newSelections = values.map((val) => {
-      if (val.value === newValue) return { ...val, selected: !val.selected };
+      if (val.value === newValue) return {...val, selected: !val.selected};
       return val;
     });
     newSelections.sort(sortBySelected);
@@ -188,11 +187,11 @@ const FilterRow = (props: RowProps) => {
 };
 
 export const Filters = (props: Props) => {
-  const { options: initialOptions, filterRows, setFilterRows } = props;
+  const {options: initialOptions, filterRows, setFilterRows} = props;
 
   function addFilterRow() {
     if (filterRows.length === 0 || filterRows.slice(-1)[0].values.length > 0) {
-      const newRows = [...filterRows, { variable: null, values: [] }];
+      const newRows = [...filterRows, {variable: null, values: []}];
       setFilterRows(newRows);
     }
   }
@@ -259,7 +258,7 @@ type Props = {
 
 type RowProps = {
   index: number;
-  row: { variable: Option | null; values: string[] };
+  row: {variable: Option | null; values: string[]};
   deleteRow: (i: number) => void;
   updateVariable: (i: number, v: Option) => void;
   updateValues: (i: number, v: string[]) => void;
